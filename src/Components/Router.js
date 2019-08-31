@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
-import Home from "../Routes/Home";
-import TV from "../Routes/TV";
-import Search from "../Routes/Search";
-import Header from "./Header/Header";
+import Home from "Routes/Home";
+import TV from "Routes/TV";
+import Search from "Routes/Search";
+import Header from "Components/Header";
 
 /**
  * exact - 정확히 path 가 일치할때 Route (path는 앞에가 같으면 먼저 route 시키는 속성때문에)
