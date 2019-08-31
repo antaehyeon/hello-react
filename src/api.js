@@ -15,7 +15,8 @@ export const moviesAPI = {
   movieDetail: id =>
     api.get(`movie/${id}`, {
       params: {
-        append_to_response: "videos"
+        append_to_response: "videos",
+        api_key: "8fdf985d69ddae89b7bce0b75cbd30be"
       }
     }),
   search: term =>
@@ -33,12 +34,14 @@ export const tvAPI = {
   showDetail: id =>
     api.get(`tv/${id}`, {
       params: {
-        append_to_response: "videos"
+        append_to_response: "videos",
+        api_key: "8fdf985d69ddae89b7bce0b75cbd30be"
       }
     }),
   search: term =>
     api.get("search/tv", {
       params: {
+        api_key: "8fdf985d69ddae89b7bce0b75cbd30be",
         query: encodeURIComponent(term)
       }
     })
