@@ -4,6 +4,7 @@ import Home from "Routes/Home";
 import TV from "Routes/TV";
 import Search from "Routes/Search";
 import Header from "Components/Header";
+import Detail from "Routes/Detail";
 
 /**
  * exact - 정확히 path 가 일치할때 Route (path는 앞에가 같으면 먼저 route 시키는 속성때문에)
@@ -18,11 +19,13 @@ export default () => (
     <>
       <Header />
       <Switch>
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/tv" exact component={TV}></Route>
+        <Route path="/" exact component={Home} />
+        <Route path="/tv" exact component={TV} />
         <Route path="/tv/popular" render={() => <h1>Popular</h1>} />
-        <Route path="/search" component={Search}></Route>
-        <Redirect from="*" to="/"></Redirect>
+        <Route path="/search" component={Search} />
+        <Route path="/movie/:id" component={Detail} />
+        <Route path="/show/:id" component={Detail} />
+        <Redirect from="*" to="/" />
       </Switch>
     </>
   </Router>
