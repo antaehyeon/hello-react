@@ -23,8 +23,6 @@ export default class HomeContainer extends Component {
         data: { results: popular }
       } = await moviesAPI.popular();
 
-      throw "ERROR";
-
       this.setState({
         nowPlaying,
         upcoming,

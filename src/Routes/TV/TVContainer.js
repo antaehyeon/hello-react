@@ -3,13 +3,16 @@ import TVPresenter from "Routes/TV/TVPresenter.js";
 import { tvAPI } from "api.js";
 
 export default class TVContainer extends Component {
-  state = {
-    topRated: null,
-    popular: null,
-    airingToday: null,
-    loading: true,
-    error: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      topRated: null,
+      popular: null,
+      airingToday: null,
+      loading: true,
+      error: null
+    };
+  }
 
   async componentDidMount() {
     try {
@@ -36,7 +39,7 @@ export default class TVContainer extends Component {
   render() {
     console.log(this.state);
 
-    const { topRated, popular, airingToday, loading, error } = this.props;
+    const { topRated, popular, airingToday, loading, error } = this.state;
     return <TVPresenter topRated={topRated} popular={popular} airingToday={airingToday} loading={loading} error={error} />;
   }
 }
