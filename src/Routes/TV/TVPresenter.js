@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Section from "Components/Section.js";
 import Loader from "Components/Loader.js";
+import Message from "Components/Message";
 
 const Container = styled.div``;
 
@@ -14,6 +15,7 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) =>
       {topRated && topRated.length > 0 && <Section title="Top Rated Shows">{topRated.map(show => show.name)}</Section>}
       {popular && popular.length > 0 && <Section title="Popular Shows">{popular.map(show => show.name)}</Section>}
       {airingToday && airingToday.length > 0 && <Section title="Airing Today">{airingToday.map(show => show.name)}</Section>}
+      {error && <Message color="#e74c3c" text={error}></Message>}
     </Container>
   );
 
