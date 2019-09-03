@@ -34,8 +34,8 @@ const SearchPresenter = ({ movieResults, tvResults, loading, searchTerm, handleS
               <Poster
                 key={movie.id}
                 id={movie.id}
-                imagrUrl={movie.poster_path}
-                title={movie.origin_title}
+                imageUrl={movie.poster_path}
+                title={movie.original_title}
                 rating={movie.vote_average}
                 year={movie.release_date.substring(0, 4)}
                 isMovie={true}
@@ -46,17 +46,14 @@ const SearchPresenter = ({ movieResults, tvResults, loading, searchTerm, handleS
         {tvResults && tvResults.length > 0 && (
           <Section title="TV Show Results">
             {tvResults.map(show => (
-              <>
-                {console.log(show)}
-                <Poster
-                  key={show.id}
-                  id={show.id}
-                  imagrUrl={show.poster_path}
-                  title={show.origin_title}
-                  rating={show.vote_average}
-                  year={show.first_air_date && show.first_air_date.substring(0, 4)}
-                />
-              </>
+              <Poster
+                key={show.id}
+                id={show.id}
+                imageUrl={show.poster_path}
+                title={show.original_name}
+                rating={show.vote_average}
+                year={show.first_air_date && show.first_air_date.substring(0, 4)}
+              />
             ))}
           </Section>
         )}
