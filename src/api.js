@@ -15,7 +15,7 @@ export const moviesAPI = {
   nowPlaying: () => api.get("movie/now_playing", commonAPIParams),
   upcoming: () => api.get("movie/upcoming", commonAPIParams),
   popular: () => api.get("movie/popular", commonAPIParams),
-  movieDetail: id => api.get(`movie/${id}`, commonAPIParams),
+  movieDetail: id => api.get(`movie/${id}`, { params: { ...commonAPIParams.params, append_to_response: "videos" } }),
   search: term =>
     api.get("search/movie", {
       params: {

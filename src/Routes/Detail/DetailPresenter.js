@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "Components/Loader";
 import Helmet from "react-helmet";
+import DetailHeader from "Components/DetailHeader";
+import YoutubeView from "Components/YoutubeView";
+import ProductionView from "Components/ProductionView";
+
+const FIRST = 0;
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -30,6 +35,7 @@ const Content = styled.div`
   height: 100%;
   z-index: 1;
 `;
+
 const Cover = styled.div`
   width: 30%;
   background-image: url(${props => props.bgImage});
@@ -76,45 +82,61 @@ const Link = styled.a`
   border-radius: 4px;
 `;
 
-const DetailPresenter = ({ result, loading, error }) => (
-  <>
-    {loading ? (
-      <>
-        <Helmet>
-          <title>{`Loading / Nomflix`}</title>
-        </Helmet>
-        <Loader />
-      </>
-    ) : (
-      <Container>
-        <Helmet>
-          <title>{result.original_title ? `${result.original_title} / Nomflix` : `Detail / Nomflix`}</title>
-        </Helmet>
-        <Backdrop bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`} />
-        <Content>
-          <Cover
-            bgImage={result.poster_path ? `https://image.tmdb.org/t/p/original${result.poster_path}` : require("../../assets/noPosterSmall.png")}
-          />
-          <Data>
-            <Title>{result.original_title ? result.original_title : result.original_name}</Title>
-            <ItemContainer>
-              <Item>{result.release_date ? result.release_date.substring(0, 4) : result.first_air_date.substring(0, 4)}</Item>
-              <Divider>•</Divider>
-              <Item>{result.runtime ? result.runtime : result.episode_run_time[0]} min</Item>
-              <Divider>•</Divider>
-              <Item>
-                {result.genres && result.genres.map((genre, index) => (index === result.genres.length - 1 ? genre.name : `${genre.name} / `))}
-              </Item>
-              <Divider />
-              <Link href={`https://www.imdb.com/title/${result.imdb_id}`}>IMDB</Link>
-            </ItemContainer>
-            <Overview>{result.overview}</Overview>
-          </Data>
-        </Content>
-      </Container>
-    )}
-  </>
-);
+const DetailPresenter = props => {
+  console.log("[Detail Presenter] props", props);
+  const {
+    result,
+    loading,
+    error,
+    location: { pathname }
+  } = props;
+
+  const [mode, setMode] = useState("youtube");
+
+  return (
+    <>
+      {console.log("[Deatil Presenter] result", result)}
+      {loading ? (
+        <>
+          <Helmet>
+            <title>{`Loading / Nomflix`}</title>
+          </Helmet>
+          <Loader />
+        </>
+      ) : (
+        <Container>
+          <Helmet>
+            <title>{result.original_title ? `${result.original_title} / Nomflix` : `Detail / Nomflix`}</title>
+          </Helmet>
+          <Backdrop bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`} />
+          <Content>
+            <Cover
+              bgImage={result.poster_path ? `https://image.tmdb.org/t/p/original${result.poster_path}` : require("../../assets/noPosterSmall.png")}
+            />
+            <Data>
+              <Title>{result.original_title ? result.original_title : result.original_name}</Title>
+              <ItemContainer>
+                <Item>{result.release_date ? result.release_date.substring(0, 4) : result.first_air_date.substring(0, 4)}</Item>
+                <Divider>•</Divider>
+                <Item>{result.runtime} min</Item>
+                <Divider>•</Divider>
+                <Item>
+                  {result.genres && result.genres.map((genre, index) => (index === result.genres.length - 1 ? genre.name : `${genre.name} / `))}
+                </Item>
+                <Divider />
+                <Link href={`https://www.imdb.com/title/${result.imdb_id}`}>IMDB</Link>
+              </ItemContainer>
+              <Overview>{result.overview}</Overview>
+              <DetailHeader mode={mode} setMode={setMode} />
+              <YoutubeView {...props} mode={mode} />
+              <ProductionView {...props} mode={mode} />
+            </Data>
+          </Content>
+        </Container>
+      )}
+    </>
+  );
+};
 
 DetailPresenter.propTypes = {
   result: PropTypes.object,

@@ -45,6 +45,6 @@ export default class componentName extends Component {
   render() {
     console.log(this.props);
     const { result, error, loading } = this.state;
-    return <DetailPresenter result={result} error={error} loading={loading}></DetailPresenter>;
+    return <DetailPresenter {...this.props} result={result} error={error} loading={loading}></DetailPresenter>;
   }
 }
