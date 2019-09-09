@@ -6,6 +6,7 @@ import Helmet from "react-helmet";
 import DetailHeader from "Components/DetailHeader";
 import YoutubeView from "Components/YoutubeView";
 import ProductionView from "Components/ProductionView";
+import SeasonView from "Components/SeasonView";
 
 const FIRST = 0;
 
@@ -127,9 +128,10 @@ const DetailPresenter = props => {
                 <Link href={`https://www.imdb.com/title/${result.imdb_id}`}>IMDB</Link>
               </ItemContainer>
               <Overview>{result.overview}</Overview>
-              <DetailHeader mode={mode} setMode={setMode} />
+              <DetailHeader mode={mode} setMode={setMode} isShow={pathname.includes("show")} />
               <YoutubeView {...props} mode={mode} />
               <ProductionView {...props} mode={mode} />
+              <SeasonView {...props} mode={mode} />
             </Data>
           </Content>
         </Container>

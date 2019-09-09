@@ -34,7 +34,7 @@ const HorizontalDivider = styled.div`
 export default props => {
   console.log("[Detail Header] props", props);
 
-  const { mode, setMode } = props;
+  const { mode, setMode, isShow } = props;
 
   return (
     <Container>
@@ -45,6 +45,11 @@ export default props => {
       <Item onClick={() => setMode("production")} isSelected={mode === "production"}>
         Production
       </Item>
+      {isShow && (
+        <Item onClick={() => setMode("season")} isSelected={mode === "season"}>
+          Seasons
+        </Item>
+      )}
     </Container>
   );
 };

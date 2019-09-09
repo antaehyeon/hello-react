@@ -12,7 +12,7 @@ const YoutubeView = props => {
   } = props;
 
   if (mode !== "youtube") return <></>;
-  if (videos.results.length === 0) return <p>유튜브 영상이 존재하지 않습니다 :(</p>;
+  if (videos.results.length === 0) return <p style={{ fontWeight: "bold", fontSize: 24 }}>유튜브 영상이 존재하지 않습니다 :(</p>;
 
   return <Youtube videoId={videos.results[FIRST].key}></Youtube>;
 };
