@@ -65,6 +65,17 @@ const Overview = styled.p`
   width: 50%;
 `;
 
+const View = styled.div`
+  display: inline-block;
+`;
+
+const Link = styled.a`
+  display: inline-block;
+  background-color: #e74c3c;
+  padding: 4px;
+  border-radius: 4px;
+`;
+
 const DetailPresenter = ({ result, loading, error }) => (
   <>
     {loading ? (
@@ -94,6 +105,8 @@ const DetailPresenter = ({ result, loading, error }) => (
               <Item>
                 {result.genres && result.genres.map((genre, index) => (index === result.genres.length - 1 ? genre.name : `${genre.name} / `))}
               </Item>
+              <Divider />
+              <Link href={`https://www.imdb.com/title/${result.imdb_id}`}>IMDB</Link>
             </ItemContainer>
             <Overview>{result.overview}</Overview>
           </Data>
